@@ -22,11 +22,11 @@ function Product() {
   }
   
   return (
-  <Container>
-  <Row xs={1} md={2} className="g-4">
+  <Container className="py-4">
+  <Row xs={1} md={4} className="g-3">
       {product.map(product => (
           <Col key={product.id} >
-          <Card>
+          <Card className="h-100">
           <Card.Img variant="top" src={product.image} alt={product.title} className="product-image"/>
           <Card.Body >
             <Card.Title>{product.title}</Card.Title>
