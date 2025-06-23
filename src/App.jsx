@@ -10,6 +10,7 @@ import { Button} from 'react-bootstrap';
 function Product() {
   const [product, setProduct] = useState([]);
   const [newProductId, setNewProductId] = useState(null);
+  const [changedProductId, setChangedProductId] = useState(null);
 
   useEffect(() => {
     async function fetchProduct() {
@@ -38,10 +39,28 @@ function Product() {
         }),
     });
     const data = await response.json();
-    setNewProductId(data.id);
+    setChangedProductId(data.id);
     alert(`Le produit avec l'id ${data.id} a été créé`);
   }
 
+  async function changeProduct(id) {
+      const response = await fetch(`https://fakestoreapi.com/products/${id}`,{
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: "Produit modifié",
+          price: 29.99,
+          description: "Déscription modifiée",
+          image : "https://via.placeholder.com/150",
+          category: "electronics",
+        }),
+    });
+    const data = await response.json();
+    setNewProductId(data.id);
+    alert(`Le produit avec l'id ${data.id} a été modifié`);
+  }
 
   if (product.length === 0) {
     return <p>Chargement...</p>;
@@ -60,6 +79,7 @@ function Product() {
                   <Card.Title>{product.title}</Card.Title>
                   <Card.Text > {product.description}</Card.Text>
                   <Card.Text>Prix : {product.price} €</Card.Text>
+                  <Button variant="secondary" onClick={() => changeProduct(product.id)}>Modifier le produit complet</Button>
                 </Card.Body>
               </Card>
             </Col>
