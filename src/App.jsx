@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
 
 function Product() {
   const [product, setProduct] = useState([]);
@@ -11,27 +14,30 @@ function Product() {
       const data = await response.json();
       setProduct(data);
     }
-
     fetchProduct();
   }, []);
 
-  if (product.lenght === 0) {
+  if (product.length === 0) {
     return <p>Chargement...</p>;
   }
-  console.log(product);
+  
   return (
-  <div className="product-container">
+  <Container>
+  <Row xs={1} md={2} className="g-4">
       {product.map(product => (
-        <Card key={product.id} className="product-card">
+          <Col key={product.id} >
+          <Card>
           <Card.Img variant="top" src={product.image} alt={product.title} className="product-image"/>
-          <Card.Body>
+          <Card.Body >
             <Card.Title>{product.title}</Card.Title>
             <Card.Text className="description"> {product.description}</Card.Text>
-            <p><strong>Prix :</strong> {product.price} €</p>
+            <Card.Text>Prix : {product.price} €</Card.Text>
           </Card.Body>
         </Card>
+        </Col>
       ))}
-    </div>
+    </Row>
+    </Container>
   );
 }
 
