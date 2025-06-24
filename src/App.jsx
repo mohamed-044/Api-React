@@ -69,6 +69,14 @@ function Product() {
     alert(`Le prix du produit avec l'id ${data.id} a été modifié`);
   }
 
+  async function deleteProduct(id) {
+      const response = await fetch(`https://fakestoreapi.com/products/${id}`,{
+        method: "DELETE",
+    });
+    const data = await response.json();
+    alert(`Le prix du produit avec l'id ${data.id} a été supprimé`);
+  }
+
   if (product.length === 0) {
     return <p>Chargement...</p>;
   }
@@ -87,7 +95,8 @@ function Product() {
                   <Card.Text > {product.description}</Card.Text>
                   <Card.Text>Prix : {product.price} €</Card.Text>
                   <Button variant="dark" onClick={() => changeProduct(product.id)}>Modifier le produit complet</Button>
-                  <Button variant="info" onClick={() => changePrice(product.id)}>Modifier le prix du produit</Button>
+                  <Button variant="success" onClick={() => changePrice(product.id)}>Modifier le prix du produit</Button>
+                  <Button variant="danger" onClick={() => deleteProduct(product.id)}>Supprimer le produit</Button>
                 </Card.Body>
               </Card>
             </Col>
