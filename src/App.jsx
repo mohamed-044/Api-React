@@ -9,9 +9,6 @@ import { Button} from 'react-bootstrap';
 
 function Product() {
   const [product, setProduct] = useState([]);
-  const [newProductId, setNewProductId] = useState(null);
-  const [changedProductId, setChangedProductId] = useState(null);
-  const [changedPriceId, setPriceProductId] = useState(null);
 
   useEffect(() => {
     async function fetchProduct() {
@@ -21,9 +18,6 @@ function Product() {
     }
     fetchProduct();
   }, []);
-
-
-  
 
     async function addProduct() {
       const response = await fetch("https://fakestoreapi.com/products",{
@@ -40,7 +34,6 @@ function Product() {
         }),
     });
     const data = await response.json();
-    setChangedProductId(data.id);
     alert(`Le produit avec l'id ${data.id} a été créé`);
   }
 
@@ -59,13 +52,7 @@ function Product() {
         }),
     });
     const data = await response.json();
-    setNewProductId(data.id);
     alert(`Le produit avec l'id ${data.id} a été modifié`);
-    setProduct((prevProducts) =>
-    prevProducts.map((p) =>
-      p.id === id ? { ...p, ...data } : p
-    )
-    );
   }
 
   async function changePrice(id) {
@@ -79,14 +66,7 @@ function Product() {
         }),
     });
     const data = await response.json();
-    setPriceProductId(data.id);
     alert(`Le prix du produit avec l'id ${data.id} a été modifié`);
-    
-    setProduct((prevProducts) =>
-    prevProducts.map((p) =>
-      p.id === id ? { ...p, price: data.price } : p
-    )
-    );
   }
 
   if (product.length === 0) {
