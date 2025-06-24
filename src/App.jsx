@@ -93,7 +93,7 @@ function Product() {
       alert(`Le produit avec l'id ${data.id} a été modifié`);
     } catch (error) {
       console.error(error.message);
-      alert("Une erreur est survenue lors de la modification du produit."); // Pour le client
+      alert("Une erreur est survenue lors de la modification du produit."); 
     }
   }
 
@@ -120,7 +120,7 @@ function Product() {
       alert(`Le prix du produit avec l'id ${data.id} a été modifié`);
     } catch (error) {
       console.error(error.message);
-      alert("Une erreur est survenue lors de la récupération du produit.");
+      alert("Une erreur est survenue lors de la modification du prix.");
     }
   }
 
@@ -141,7 +141,7 @@ function Product() {
       alert(`Le prix du produit avec l'id ${data.id} a été supprimé`);
     } catch (error) {
       console.error(error.message);
-      alert("Une erreur est survenue lors de la récupération du produit.");
+      alert("Une erreur est survenue lors de la suppression du produit.");
     }
   }
 
